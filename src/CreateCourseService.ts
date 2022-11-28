@@ -4,10 +4,10 @@ interface Course{
     educator: string;
 }
 
-class CreateCourseService{
-    execute({ duration,name,educator }:Course){
-        console.log(name,duration,educator);
-    }
+class CreateCourseService {
+  execute({ duration, name, educator }:Course) {
+    console.log(name, duration, educator);
+  }
 }
 
-export default new CreateCourseService;
+export default new CreateCourseService();
