@@ -4,10 +4,19 @@ import { createCourse } from "./routes";
 
 const app = express();
 
-//app.get('/', createCourse);
+//Funcionamento de json
+app.use(express.json());
 
-app.get('/', (request,response) =>{
+//app.get("/", createCourse);
+
+app.get("/", (request,response) =>{
     return response.json({message: "Hello World"});
+});
+
+app.post("/courses", (request, response) => {
+    const {name} = request.body;
+    
+    return response.json({name})
 });
 
 app.listen(3333);
