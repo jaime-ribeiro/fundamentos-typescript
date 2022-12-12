@@ -1,24 +1,18 @@
 import { Router } from "express";
 
-import { CategoriesRepository } from "../modules/cars/repositories/CategoriesRepository";
-import { CreateCategoryUseCase } from "../modules/cars/useCases/createCategory/CreateCategoryUseCase";
+import { createCategoryController } from "../modules/cars/useCases/createCategory";
+import { listCategoriesController } from "../modules/cars/useCases/listCategories";
+// este import de instanciar as classes são utilizados no index, por isso está indo somente até a pasta "listCategories"
 
 // Creating new Router object
 const categoriesRoutes = Router();
-const categoriesRepository = new CategoriesRepository();
 
 categoriesRoutes.post("/", (request, response) => {
-  const { name, description } = request.body;
-
-  const createCategoryService = new CreateCategoryUseCase(categoriesRepository);
-
-  createCategoryService.execute({ name, description });
-  return response.status(201).send();
+  return createCategoryController.handle(request, response);
 });
 
 categoriesRoutes.get("/", (request, response) => {
-  const all = categoriesRepository.list();
-  return response.status(201).json(all);
+  return listCategoriesController.handle(request, response);
 });
 
 export { categoriesRoutes };
