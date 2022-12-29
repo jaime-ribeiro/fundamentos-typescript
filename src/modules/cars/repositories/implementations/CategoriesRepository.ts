@@ -9,19 +9,19 @@ import {
 class CategoriesRepository implements ICategoriesRepository {
   private repository: Repository<Category>;
 
-  // eslint-disable-next-line no-use-before-define
-  private static INSTANCE: CategoriesRepository;
-
-  private constructor() {
+  constructor() {
     this.repository = getRepository(Category);
   }
-
+  /*
+  Foi comentado devido está sendo utilizado Banco de Dados agora
   public static getInstance(): CategoriesRepository {
     if (!CategoriesRepository.INSTANCE) {
       CategoriesRepository.INSTANCE = new CategoriesRepository();
     }
     return CategoriesRepository.INSTANCE;
   }
+  */
+
   // Devido estarmos trabalhando com async await, a resposta esperada não pode ser mais void, e sim Promise<void>
   async create({ name, description }: ICreateCategoryDTO): Promise<void> {
     // criando entidade para salvar, created_at será responsabiliadde do banco de dados salvar
