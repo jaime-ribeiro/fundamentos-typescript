@@ -1,13 +1,13 @@
 import { Specification } from "../entities/Specification";
 // DTO => Data transfer object
-interface ISpecificationDTO {
+interface ICreateSpecificationDTO {
   name: string;
   description: string;
 }
 interface ISpecificationsRepository {
-  findByName(name: string): Specification;
-  list(): Specification[];
-  create({ name, description }: ISpecificationDTO): void;
+  findByName(name: string): Promise<Specification>;
+  list(): Promise<Specification[]>;
+  create({ name, description }: ICreateSpecificationDTO): Promise<void>;
 }
 
-export { ISpecificationsRepository, ISpecificationDTO };
+export { ISpecificationsRepository, ICreateSpecificationDTO };

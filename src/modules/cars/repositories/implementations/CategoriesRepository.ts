@@ -12,19 +12,7 @@ class CategoriesRepository implements ICategoriesRepository {
   constructor() {
     this.repository = getRepository(Category);
   }
-  /*
-  Foi comentado devido está sendo utilizado Banco de Dados agora
-  public static getInstance(): CategoriesRepository {
-    if (!CategoriesRepository.INSTANCE) {
-      CategoriesRepository.INSTANCE = new CategoriesRepository();
-    }
-    return CategoriesRepository.INSTANCE;
-  }
-  */
-
-  // Devido estarmos trabalhando com async await, a resposta esperada não pode ser mais void, e sim Promise<void>
   async create({ name, description }: ICreateCategoryDTO): Promise<void> {
-    // criando entidade para salvar, created_at será responsabiliadde do banco de dados salvar
     const category = this.repository.create({
       name,
       description,
@@ -38,7 +26,6 @@ class CategoriesRepository implements ICategoriesRepository {
   }
 
   async findByName(name: string): Promise<Category> {
-    // Select * from categories where name = "name" limit 1
     const category = await this.repository.findOne({ name });
     return category;
   }
